@@ -1,0 +1,48 @@
+<!--시군구 등록-->
+<div class="container">
+    <h5 class = "my-3 border-bottom pb-2">데이터 요청 해봅시다아아</h5>
+    <select name="sigungu_code">
+        {% for city_name in city_name_list %}
+        <option value={{regional_code}}>{{city_name}}</option>
+        {% endfor %}
+    </select>
+    <form method="post" class="my-3">
+        <div class="mb-3">
+            <label for="property_type">시군구 코드</label>
+            <select name="sigungu_code">
+                {% for regional_code, regional_name in regional_dict.items() %}
+				<option value={{regional_code}}>{{regional_name}}</option>
+                {% endfor %}
+			</select>
+        </div>
+        <div class="mb-3">
+            <label for="trade_type">년월</label>
+            <input type="text" class="form-control" name="deal_date" id="deal_date">
+        </div>
+        <button type="submit" class="btn btn-primary">제출</button>
+    </form>
+
+    <div class="container mt-5">
+        <h2>Result</h2>
+        <label>{{result_msg}}</label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {% for column in df.columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in df.iterrows() %}
+                    <tr>
+                        {% for value in row[1] %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
